@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle del Hito{% endblock %}
+{% load static %}
+
+{% block content %}
+<style>
+    .details-container {
+        max-width: 700px;
+        margin: auto;
+        padding: 30px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .details-container h1 {
+        color: #315fbf;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .details-container p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    .details-container .action-buttons {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .details-container .action-buttons a,
+    .details-container .action-buttons form button {
+        padding: 10px;
+        text-decoration: none;
+        text-align: center;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .details-container .btn-edit {
+        background-color: #ffc107;
+    }
+
+    .details-container .btn-edit:hover {
+        background-color: #e0a800;
+    }
+
+    .details-container .btn-delete {
+        background-color: #dc3545;
+    }
+
+    .details-container .btn-delete:hover {
+        background-color: #c82333;
+    }
+
+    .details-container a {
+        color: #315fbf;
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        text-decoration: none;
+    }
+
+    .details-container a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="details-container">
+    <h1>Detalle del Hito</h1>
+    <p><strong>Título:</strong> {{ hito.titulo }}</p>
+    <p><strong>Descripción:</strong> {{ hito.descripcion }}</p>
+    <p><strong>Fecha de Cumplimiento:</strong> {{ hito.fecha_cumplimiento }}</p>
+    <p><strong>Estado:</strong> {{ hito.estado }}</p>
+
+    <div class="action-buttons">
+        <a href="{% url 'core:editar_hito' hito.id %}" class="btn-edit">Editar</a>
+        <form action="{% url 'core:eliminar_hito' hito.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn-delete">Eliminar</button>
+        </form>
+    </div>
+    <a href="{% url 'core:detalle_compromiso' hito.compromiso.id %}">Volver al Compromiso</a>
+</div>
+{% endblock %}

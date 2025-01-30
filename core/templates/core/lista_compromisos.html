@@ -1,0 +1,239 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Compromisos{% endblock %}
+{% load static %}
+
+{% block content %}
+
+  <style>
+    .h3a {
+        font-size: 2rem; /* Tamaño base */
+        color: #315fbf;
+        line-height: 1.5;
+        text-align: center;
+    }
+
+    /* General Styles */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url("{% static 'img/banner.jpg' %}"); /* Ruta del banner */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: #333;
+    }
+
+    h1 {
+        color: #315fbf; /* Color para el <h1> */
+        text-align: center; /* Centrado del título principal */
+        font-size: 2rem;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .content {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 30px;
+        background-color: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra para destacar el contenido */
+        border-radius: 10px;
+    }
+
+    /* Estilo para los inputs */
+    .content .mb-3 {
+        margin-bottom: 15px;
+    }
+
+    .content input, .content select, .content textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+
+    .content input:focus, .content select:focus, .content textarea:focus {
+        outline: none;
+        border-color: #315fbf; /* Color del borde al enfocar */
+        box-shadow: 0 0 5px rgba(49, 95, 191, 0.5);
+    }
+
+    button {
+        padding: 10px;
+        background-color: #315fbf;
+        border: none;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+        width: 100%;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #254a8f;
+    }
+
+    /* Tabla Styling */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .table, th, td {
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f8f9fa;
+        color: #333;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .actions a {
+        text-decoration: none;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .actions a i {
+        font-size: 18px;
+    }
+
+    .view-btn {
+        background-color: #28a745;
+    }
+
+    .view-btn:hover {
+        background-color: #218838;
+        transform: scale(1.1);
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .pagination li {
+        margin: 0 5px;
+    }
+
+    .pagination a {
+        text-decoration: none;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        color: #007bff;
+        border-radius: 5px;
+    }
+
+    .pagination a:hover, .pagination .active {
+        background-color: #007bff;
+        color: white;
+        border: 1px solid #007bff;
+    }
+
+    /* Estilo responsivo */
+    @media (max-width: 768px) {
+        .content {
+            padding: 15px;
+            margin: 10px;
+        }
+
+        h1, .h3a {
+            font-size: 1.8rem;
+        }
+
+        .actions a {
+            font-size: 14px;
+            padding: 6px 10px;
+        }
+
+        .pagination a {
+            font-size: 12px;
+            padding: 6px 10px;
+        }
+    }
+
+  </style>
+
+  <div class="content">
+    <h3 class="h3a">COMPROMISOS</h3>
+    <a href="{% url 'core:crear_compromiso' %}" class="btn btn-primary mb-3">Crear Nuevo Compromiso</a>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Área Responsable</th>
+                    <th>Avance</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for compromiso in compromisos %}
+                    <tr>
+                        <td>{{ compromiso.titulo }}</td>
+                        <td>{{ compromiso.area_responsable }}</td>
+                        <td>{{ compromiso.avance }}%</td>
+                        <td>
+                            <div class="actions">
+                                <!-- Íconos de acción con transiciones -->
+                                <a href="{% url 'core:detalle_compromiso' compromiso.id %}" class="view-btn" title="Ver detalle">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Paginación -->
+    <ul class="pagination">
+        {% if compromisos.has_previous %}
+            <li><a href="?page=1">Primera</a></li>
+            <li><a href="?page={{ compromisos.previous_page_number }}">Anterior</a></li>
+        {% endif %}
+
+        {% for num in compromisos.paginator.page_range %}
+            {% if compromisos.number == num %}
+                <li><span class="active">{{ num }}</span></li>
+            {% elif num > compromisos.number|add:'-3' and num < compromisos.number|add:'3' %}
+                <li><a href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if compromisos.has_next %}
+            <li><a href="?page={{ compromisos.next_page_number }}">Siguiente</a></li>
+            <li><a href="?page={{ compromisos.paginator.num_pages }}">Última</a></li>
+        {% endif %}
+    </ul>
+
+  </div>
+
+{% endblock %}

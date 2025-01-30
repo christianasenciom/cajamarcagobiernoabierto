@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>{% block title %}Cajamarca Gobierno Abierto{% endblock %}</title>
+    <link rel="icon" href="favicon.ico" type="imd/icon.">
+    <link rel="icon" href="{% static 'img/fav.ico' %}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'core:home' %}">
+                <img src="{% static 'img/logogac.png' %}" alt="Logo" width="170" height="30" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core:home' %}">Inicio</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Cajamarca Gobierno Abierto
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/introduccion/">Introducción</a></li>
+                            <li><a class="dropdown-item" href="/miembros/">Miembros</a></li>
+                            <li><a class="dropdown-item" href="/foro_multiactor/">Foro Multiactor</a></li>
+                            <li><a class="dropdown-item" href="/calendario/">Calendario</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Plan de Acción  2024 - 2026
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/introduccionpal/">Introducción</a></li>
+                            <li><a class="dropdown-item" href="/tablero">Compromisos</a></li>
+                            <li><a class="dropdown-item" href="/metodologia">Metodología</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/repositorio/">Repositorio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contacto/">Contacto</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        {% if user.is_superuser %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Control
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/bienvenido/">Tablero de control</a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li class="nav-item dropdown">
+                                <!--<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Ejes y Compromisos
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/registrar_persona/">XXXXXXXXXXXX</a></li>
+                                    <li><a class="dropdown-item" href="/registrar_organizacion/">XXXXXXXXXXX</a></li>
+                                </ul>-->
+                            </li>
+                        {% endif %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <strong>{{ user.first_name }} {{ user.last_name }}</strong>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                                    <img src="{{ user.profile_image.url|default:'/static/img/perfil.png' }}" alt="Foto de perfil" class="profile-img">
+                                    <li><a class="dropdown-item" href="{% url 'core:profile' %}">Perfil</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'core:logout' %}">Cerrar sesión</a></li>
+                                </ul>
+                            </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'core:user_login' %}">Iniciar sesión</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'core:user_register' %}">Registrar usuario</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="https://www.facebook.com" target="_blank" class="text-decoration-none text-light">
+                        Copyright © 2025 Gobierno Regional Cajamarca. Todos los derechos reservados<br>
+                        Desarrollo: DRTD
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-unstyled d-flex justify-content-center mb-0">
+                        <li class="ms-3"><a class="text-light text-decoration-none" href="/politicaprivacidad/">Política de privacidad</a></li>
+                        <li class="ms-3"><a class="text-light text-decoration-none" href="/terms_and_conditions/">Términos y condiciones</a></li>
+                        <li class="ms-3"><a class="text-light text-decoration-none" href="/contacto/">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

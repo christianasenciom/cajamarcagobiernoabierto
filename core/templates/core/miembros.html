@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% block title %}Miembros{% endblock %}
+
+{% block content %}
+<style>
+      .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        padding: 20px;
+    }
+    .card {
+        width: 300px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+
+    }
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+    .card-header {
+        background-color: #315fbf;
+        color: white;
+        padding: 5px;
+        text-align: center;
+    }
+    .card-body {
+        padding: 10px;
+        font-size: 10px;
+    }
+
+
+    h3 {
+      font-size: 1.7em;
+
+  }
+    .h3cf {
+      font-size: 1em;
+  }
+
+    h2 {
+      font-size: 1.2em;
+
+  }
+  h1 {
+            font-size: 2rem; /* Tamaño base */
+            color: #315fbf;
+            line-height: 1.5;
+            text-align: center;
+            margin-bottom: 40px;
+  }
+
+  p {
+      font-size: 0.8em;
+  }
+
+        @media (max-width: 1024px) {
+            h3 {
+                font-size: 1.6rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.4rem;
+            }
+            .h3cf {
+                  font-size: 0.9em;
+              }
+        }
+
+        @media (max-width: 768px) {
+            h3 {
+                font-size: 1.5rem;
+                text-align: left;
+            }
+            h1 {
+                font-size: 1.3rem;
+            }
+            h2 {
+                font-size: 0.9rem;
+            }
+            .h3cf {
+                  font-size: 0.8em;
+              }
+        }
+
+        @media (max-width: 480px) {
+            h3 {
+                font-size: 1.4rem;
+            }
+
+            h1 {
+                font-size: 1.2rem;
+            }
+            h2 {
+                font-size: 0.8rem;
+            }
+            .h3cf {
+                  font-size: 0.7em;
+              }
+        }
+
+  .card-footer {
+        padding: 7px;
+        text-align: center;
+        background-color: #f1f1f1;
+    }
+</style>
+
+<div class="content">
+    <h1><strong>MIEMBROS ({{ personas.count }})</strong></h1>
+    <div class="card-container">
+        {% for persona in personas %}
+        <div class="card">
+             <div class="card-header">
+                <h2><strong>{{ persona.nombres }} {{ persona.apellidos }}</strong></h2>
+             </div>
+            <div class="card-body">
+                <h3><strong>Cargo:</strong> {{ persona.cargo }}</h3>
+                <h3><strong>Email:</strong> <a href="mailto:{{ persona.correo_electronico }}">{{ persona.correo_electronico }}</a></h3>
+                <h3><strong>Condición:</strong> {{ persona.condicion }}</h3>
+            </div>
+            <div class="card-footer">
+                <h3 class="h3cf"><strong>Organización:</strong> {{ persona.organizacion }}</h3>
+                <img src="{{ persona.organizacion.logo.url }}" alt="Logo de {{ persona.organizacion.nombre }}"
+                class="img-logo" style="max-width: 70px; height: auto; display: block; margin: 0 auto;">
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

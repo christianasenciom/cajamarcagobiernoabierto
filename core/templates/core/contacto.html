@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block title %}Contacto{% endblock %}
+
+{% block content %}
+    <style>
+
+        h3 {
+            font-size: 2rem; /* Tamaño base */
+            color: #315fbf;
+            line-height: 1.5;
+            text-align: center;
+        }
+        h2 {
+            font-size: 1.8rem; /* Tamaño base */
+            color: #315fbf;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            h3 {
+                font-size: 1.6rem; /* Disminuye ligeramente en pantallas medianas */
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h3 {
+                font-size: 1.4rem; /* Aún más pequeño en pantallas pequeñas */
+                text-align: left;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h3 {
+                font-size: 1.2rem; /* Ajuste para pantallas móviles */
+            }
+
+            h2 {
+                font-size: 1rem;
+            }
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Color de fondo suave */
+            color: #333;
+        }
+
+        h1 {
+            color: #315fbf; /* Color para el <h1> */
+            text-align: center; /* Centrado del título principal */
+            font-size: 2rem;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #315fbf; /* Color para el <h2> */
+            font-size: 1.6rem;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+
+        .content {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 50px;
+            background-color: white;
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Estilo para los párrafos <p> */
+        p {
+            text-align: justify;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+
+        a {
+            color: #315fbf;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+
+
+        @media screen and (max-width: 768px) {
+
+            .content {
+                padding: 15px;
+            }
+
+        }
+    </style>
+    <body>
+        <div class="content">
+            <h3><strong>CONTACTO</strong></h3>
+            <p>
+                Para más información escríbenos a través de <a href="mailto:sgpcti@regioncajamarca.gob.pe">sgpcti@regioncajamarca.gob.pe</a>
+            </p>
+            <!--<p>
+                Busca actualizaciones del proceso y del Plan de Acción utilizando el hashtag
+                <a href="https://twitter.com/search?q=%23" target="_blank">#GobiernoAbiertoCajamarca</a>.
+            </p>-->
+            <br>
+            <h2><strong>Redes sociales</strong></h2>
+            <ul class="redes-sociales">
+                {% for red in redes %}
+                    <li><a href="{{ red.enlace }}" target="_blank">{{ red.nombre }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+{% endblock %}

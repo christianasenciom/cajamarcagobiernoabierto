@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% block title %}Lista de Organizaciones{% endblock %}
+{% block content %}
+   <style>
+   .h3a {
+            font-size: 2rem; /* Tamaño base */
+            color: #315fbf;
+            line-height: 1.5;
+            text-align: center;
+    }
+    /* General Styles */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+        color: #444;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background-color: #fff;
+    }
+
+    table th, table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    table th {
+        background-color: #315fbf;
+        color: white;
+    }
+
+    table tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+    }
+
+    .pagination li {
+        margin: 0 5px;
+    }
+
+    .pagination li a, .pagination li span {
+        padding: 8px 12px;
+        text-decoration: none;
+        color: #315fbf;
+        border: 1px solid #315fbf;
+        border-radius: 4px;
+    }
+
+    .pagination li a:hover {
+        background-color: #315fbf;
+        color: white;
+    }
+
+    .btn-primary, .edit-btn, .delete-btn {
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        color: white;
+        background-color: #315fbf;
+        border: none;
+        display: inline-block;
+    }
+
+    .edit-btn {
+        background-color: #315fbf;
+    }
+
+    .delete-btn {
+        background-color: #f44336;
+    }
+
+    .btn-primary:hover, .edit-btn:hover, .delete-btn:hover {
+        opacity: 0.9;
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+        table, thead, tbody, th, td, tr {
+            display: block;
+            width: 100%;
+        }
+
+        table thead tr {
+            display: none;
+        }
+
+        table td {
+            border: none;
+            position: relative;
+            padding-left: 50%;
+            text-align: right;
+        }
+
+        table td:before {
+            content: attr(data-label);
+            position: absolute;
+            left: 10px;
+            width: 45%;
+            text-align: left;
+            font-weight: bold;
+        }
+
+
+
+        .pagination {
+            flex-wrap: wrap;
+        }
+
+        .pagination li {
+            margin: 5px;
+        }
+    }
+    </style>
+
+  <h3 class="h3a"><strong>ORGANIZACIONES</strong></h3>
+
+  <div style="text-align: center; margin-bottom: 20px;">
+      <a href="{% url 'core:registrar_organizacion' %}" class="btn-primary">Registrar Nueva Organización</a>
+  </div>
+
+  <table>
+      <thead>
+          <tr>
+              <th>#</th>
+              <th>Logo</th>
+              <th>Razón Social</th>
+              <th>Dirección</th>
+              <th>Rubro</th>
+              <th>Provincias</th>
+              <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for organizacion in page_obj %}
+              <tr>
+                  <td data-label="#">{{ forloop.counter }}</td>
+                  <td data-label="Logo">
+                        {% if organizacion.logo %}
+                            <img src="{{ organizacion.logo.url }}" alt="Logo de {{ organizacion.razon_social }}"
+                                class="img-logo" style="max-width: 50px; height: auto;">
+                        {% else %}
+                            No disponible
+                        {% endif %}
+                  </td>
+
+                  <td data-label="Razón Social">{{ organizacion.razon_social }}</td>
+                  <td data-label="Dirección">{{ organizacion.direccion }}</td>
+                  <td data-label="Rubro">{{ organizacion.rubro }}</td>
+                  <td data-label="Provincias">
+                      {% for provincia in organizacion.provincias.all %}
+                          {{ provincia.nombre }}{% if not forloop.last %}, {% endif %}
+                      {% endfor %}
+                  </td>
+                  <td data-label="Acciones">
+                      <a href="{% url 'core:editar_organizacion' organizacion.id %}" class="edit-btn">Editar</a>
+                      <a href="{% url 'core:confirmar_eliminar_organizacion' organizacion.id %}" class="delete-btn">Eliminar</a>
+                  </td>
+              </tr>
+          {% empty %}z
+              <tr>
+                  <td colspan="7" style="text-align: center;">No hay organizaciones registradas.</td>
+              </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+
+  <ul class="pagination">
+      {% if page_obj.has_previous %}
+          <li><a href="?page=1">Primera</a></li>
+          <li><a href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+              <li><span class="active">{{ num }}</span></li>
+          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+              <li><a href="?page={{ num }}">{{ num }}</a></li>
+          {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+          <li><a href="?page={{ page_obj.next_page_number }}">Siguiente</a></li>
+          <li><a href="?page={{ page_obj.paginator.num_pages }}">Última</a></li>
+      {% endif %}
+  </ul>
+{% endblock %}

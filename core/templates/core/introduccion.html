@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Introducción{% endblock %}
+{% block content %}
+    <style>
+
+        h3 {
+            font-size: 2rem; /* Tamaño base */
+            color: #315fbf;
+            line-height: 1.5;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h2 {
+            font-size: 1.8rem; /* Tamaño base */
+            color: #315fbf;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            h3 {
+                font-size: 1.6rem; /* Disminuye ligeramente en pantallas medianas */
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h3 {
+                font-size: 1.4rem; /* Aún más pequeño en pantallas pequeñas */
+                text-align: left;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h3 {
+                font-size: 1.2rem; /* Ajuste para pantallas móviles */
+            }
+
+            h2 {
+                font-size: 1rem;
+            }
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Color de fondo suave */
+            color: #333;
+        }
+
+        h1 {
+            color: #315fbf; /* Color para el <h1> */
+            text-align: center; /* Centrado del título principal */
+            font-size: 2rem;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #315fbf; /* Color para el <h2> */
+            font-size: 1.6rem;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+
+        .content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 50px;
+            background-color: white;
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Estilo para los párrafos <p> */
+        p {
+            text-align: justify;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+
+        a {
+            color: #315fbf;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+
+
+        @media screen and (max-width: 768px) {
+
+            .content {
+                padding: 15px;
+            }
+
+        }
+    </style>
+    <body>
+        <div class="content">
+            <h3><strong>INTRODUCCIÓN</strong></h3>
+            <div class="banner-container">
+                <img src="{% static 'img/contexto.jpg' %}" alt="Banner" class="banner-img">
+            </div>
+            <p>
+                La Región Cajamarca se suma a las regiones que han llevado a cabo actividades en búsqueda de la mejora de efectividad de la participación ciudadana institucional, a partir de estas actividades que implican formulación de planes mediante talleres participativos, fortalecimiento de capacidades a sociedad civil, colaboraciones con sociedad civil, es que llevó al Gobierno Regional de Cajamarca a seguir comprometiéndose a fortalecer e implementar en otras dependencias el Gobierno Abierto.
+                Por su parte, el Gobierno Abierto  busca mejorar la relación entre la población cajamarquina y el Gobierno Regional de Cajamarca  a través de la colaboración, el aprovechamiento de la inteligencia colectiva, la participación inclusiva, la transparencia y acceso a la información, la rendición de cuentas y la innovación, además reconoce la importancia del diálogo y del trabajo articulado para mejorar la eficiencia y eficacia pública.
+                En el marco del Gobierno Abierto, el Gobierno Regional de Cajamarca impulsa un modelo de gobernanza colaborativa que busca acercar al Gobierno Regional con las personas, para construir soluciones en conjunto que atiendan las necesidades de la población cajamarquina. Dentro de esta visión de gobernanza colaborativa, se crea el Foro Multiactor de Gobierno Abierto Cajamarca con tal de contar con un espacio de colaboración y participación dentro del cual se toman decisiones del Plan de Acción de Gobierno Abierto Cajamarca periodo 2024-2026.
+            </p>
+        </div>
+    </body>
+{% endblock %}

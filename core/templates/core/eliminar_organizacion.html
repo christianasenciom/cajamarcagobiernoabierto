@@ -1,0 +1,54 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Lista de Organizaciones{% endblock %}
+
+{% block content %}
+    <style>
+        form {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        h3 {
+            color: #315fbf;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input, select, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>¿Estás seguro de que deseas eliminar esta organización?</h1>
+    <p><strong>Razón Social:</strong> {{ organizacion.razon_social }}</p>
+    <p><strong>Dirección:</strong> {{ organizacion.direccion }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sí, eliminar</button>
+        <a href="{% url 'core:organizacion_lista' %}">Cancelar</a>
+    </form>
+</body>
+{% endblock %}

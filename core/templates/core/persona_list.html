@@ -1,0 +1,232 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Lista de Personas{% endblock %}
+
+{% block content %}
+  <style>
+        .h3a {
+                font-size: 2rem; /* Tamaño base */
+                color: #315fbf;
+                line-height: 1.5;
+                text-align: center;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("{% static 'img/banner.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination a {
+            text-decoration: none;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            color: #007bff;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .pagination a:hover, .pagination .active {
+            background-color: #007bff;
+            color: white;
+            border: 1px solid #007bff;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .actions a {
+            text-decoration: none;
+            color: white;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .edit-btn {
+            background-color: #ffc107;
+        }
+
+        .edit-btn:hover {
+            background-color: #e0a800;
+            transform: scale(1.1);
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+            transform: scale(1.1);
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .actions a i {
+            font-size: 18px;
+        }
+
+        /* Estilo responsivo para pantallas pequeñas */
+        @media (max-width: 768px) {
+            table, th, td {
+                padding: 8px;
+            }
+
+            .pagination a {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+
+            .btn-primary {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+
+            .actions a {
+                font-size: 14px;
+                padding: 6px;
+            }
+        }
+
+  </style>
+
+  <div class="content">
+    <h3 CLASS="h3a"><strong>MIEMBROS DEL FORO MULTIACTOR</strong></h3>
+
+    <!-- Botón para redirigir a registrar nueva persona -->
+    <a href="{% url 'core:registrar_persona' %}" class="btn-primary">Registrar Nueva Persona</a>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Condición</th>
+                    <th>Nombre(s)</th>
+                    <th>Apellidos</th>
+                    <th>Email</th>
+                    <th>Cargo</th>
+                    <th>Organización</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for persona in page_obj %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ persona.condicion.nombre }}</td>
+                        <td>{{ persona.nombres }}</td>
+                        <td>{{ persona.apellidos }}</td>
+                        <td>{{ persona.correo_electronico }}</td>
+                        <td>{{ persona.cargo }}</td>
+                        <td>{{ persona.organizacion.razon_social }}</td>
+                        <td>
+                            <div class="actions">
+                                <!-- Íconos para editar y eliminar -->
+                                <a href="{% url 'core:editar_persona' persona.id %}" class="edit-btn" title="Editar">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="{% url 'core:confirmar_eliminar_persona' persona.id %}" class="delete-btn" title="Eliminar">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="8">No hay personas registradas.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Paginación -->
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li><a href="?page=1">Primera</a></li>
+            <li><a href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <li><span class="active">{{ num }}</span></li>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <li><a href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}">Siguiente</a></li>
+            <li><a href="?page={{ page_obj.paginator.num_pages }}">Última</a></li>
+        {% endif %}
+    </ul>
+  </div>
+
+{% endblock %}

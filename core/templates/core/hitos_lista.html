@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Lista de hitos{% endblock %}
+
+{% block content %}
+  <style>
+    .h3a {
+                font-size: 2rem; /* Tamaño base */
+                color: #315fbf;
+                line-height: 1.5;
+                text-align: center;
+    }
+    body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("{% static 'img/banner.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+    }
+
+    /* Responsividad y diseño de la tabla */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Botones y acciones */
+    .btn-primary, .edit-btn, .delete-btn {
+      text-decoration: none;
+      padding: 8px 12px;
+      color: white;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      margin-bottom: 15px;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+    .edit-btn {
+      background-color: #ffc107;
+    }
+
+    .edit-btn:hover {
+      background-color: #e0a800;
+    }
+
+    .delete-btn {
+      background-color: #dc3545;
+    }
+
+    .delete-btn:hover {
+      background-color: #c82333;
+    }
+
+    /* Paginación */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .pagination li {
+      margin: 0 5px;
+    }
+
+    .pagination a {
+      text-decoration: none;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      color: #007bff;
+      border-radius: 5px;
+    }
+
+    .pagination a:hover, .pagination .active {
+      background-color: #007bff;
+      color: white;
+      border: 1px solid #007bff;
+    }
+
+    /* Media queries para dispositivos pequeños */
+    @media (max-width: 768px) {
+      table, th, td {
+        font-size: 14px;
+      }
+
+      .btn-primary, .edit-btn, .delete-btn {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+
+      .pagination a {
+        padding: 6px 8px;
+      }
+    }
+  </style>
+
+  <div class="content">
+    <h3 CLASS="h3a"><strong>Hitos</strong></h3><br>
+    <!-- Botón para redirigir a registrar nuevo hito -->
+    <a href="{% url 'core:agregar_hito'%}" class="btn-primary">Crear Hito</a><br><br>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Compromiso</th>
+          <th>Título</th>
+          <th>Estado</th>
+          <th>Fecha Inicio</th>
+          <th>Fecha Final</th>
+          <th>Avance</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for hito in page_obj %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ hito.compromiso.titulo }}</td>
+            <td>{{ hito.titulo }}</td>
+            <td>{{ hito.estado }}</td>
+            <td>{{ hito.fecha_inicio }}</td>
+            <td>{{ hito.fecha_final }}</td>
+            <td>{{ hito.avance }}</td>
+            <td>{% if hito.evidencia %}
+                    <a href="{{ hito.evidencia }}" target="_blank" class="icon-link"><i class="fas fa-search"></i></a>
+                {% else %}
+                        No disponible
+                {% endif %}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="8">No hay registros.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- Paginación -->
+    <ul class="pagination">
+      {% if page_obj.has_previous %}
+        <li><a href="?page=1">Primera</a></li>
+        <li><a href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <li><span class="active">{{ num }}</span></li>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <li><a href="?page={{ num }}">{{ num }}</a></li>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}">Siguiente</a></li>
+        <li><a href="?page={{ page_obj.paginator.num_pages }}">Última</a></li>
+      {% endif %}
+    </ul>
+  </div>
+
+  <script>
+    // Mejora interactiva: Confirmación al intentar eliminar un hito (si lo implementas más adelante)
+    document.querySelectorAll('.delete-btn').forEach(button => {
+      button.addEventListener('click', function(event) {
+        if (!confirm('¿Estás seguro de que deseas eliminar este hito?')) {
+          event.preventDefault();
+        }
+      });
+    });
+  </script>
+{% endblock %}

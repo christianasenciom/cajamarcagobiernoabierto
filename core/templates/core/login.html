@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}LogIn{% endblock %}
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url("{% static 'img/banner.jpg' %}"); /* Ruta del banner */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed; /* Hace que el fondo permanezca fijo al desplazarse */
+        color: #333;
+    }
+    .content {
+        width: 90%;
+        max-width: 400px;
+        padding: 30px;
+        background-color: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
+        box-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        text-align: center;
+    }
+    .content img {
+        width: 350px;
+        height: auto;
+        margin-bottom: 20px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        margin: 20px auto;
+    }
+    form input[type="text"],
+    form input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+    button {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #315fbf;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #254a91;
+    }
+
+    p {
+        font-size: 1rem;
+        margin-top: 15px;
+    }
+
+    a {
+        color: #315fbf;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="content">
+        <img src="{% static 'img/logogac.png' %}" alt="Logo">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.username.label_tag }}
+            {{ form.username }}
+            {{ form.password.label_tag }}
+            {{ form.password }}
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <p class="text-center mt-3">
+            ¿No tienes una cuenta? <a href="{% url 'core:user_register' %}">Regístrate aquí</a>.
+        </p>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Introducción{% endblock %}
+{% block content %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("{% static 'img/banner.jpg' %}"); /* Ruta del banner */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Hace que el fondo permanezca fijo al desplazarse */
+            color: #333;
+        }
+
+        h1 {
+            color: #315fbf; /* Color para el <h1> */
+            text-align: center; /* Centrado del título principal */
+            font-size: 2rem;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra para destacar el contenido */
+            border-radius: 10px;
+        }
+
+        /* Estilo para los inputs */
+        .content .mb-3 {
+            margin-bottom: 15px;
+        }
+
+        .content input, .content select, .content textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .content input:focus, .content select:focus, .content textarea:focus {
+            outline: none;
+            border-color: #315fbf; /* Color del borde al enfocar */
+            box-shadow: 0 0 5px rgba(49, 95, 191, 0.5);
+        }
+
+        button {
+            padding: 10px;
+            background-color: #315fbf;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #254a8f;
+        }
+
+        /* Estilos responsivos */
+        @media screen and (max-width: 768px) {
+            body {
+                background-position: center;
+                background-size: cover;
+            }
+
+            .content {
+                padding: 15px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+<body>
+    <div class="content">
+        <h1><strong>REGISTRAR DOCUMENTO</strong></h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nombre">Nombre del Documento</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="categoria">Categoría</label>
+                <select id="categoria" name="categoria" required>
+                    {% for categoria in categorias %}
+                    <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="url">URL del Documento</label>
+                <input type="url" id="url" name="url" required>
+            </div><BR>
+            <div class="form-group">
+                <button type="submit">Registrar</button>
+            </div>
+        </form>
+    </div>
+</body>
+{% endblock %}

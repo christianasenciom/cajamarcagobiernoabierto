@@ -1,0 +1,18 @@
+<svg width="400" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#f0f4c3"/>
+  <text x="50%" y="40" font-family="Arial" font-size="24" fill="#33691e" text-anchor="middle">Revisión Pública</text>
+  <text x="50%" y="80" font-family="Arial" font-size="20" fill="#1b5e20" text-anchor="middle">del Plan de Acción Local</text>
+  
+  <rect x="100" y="150" width="200" height="300" fill="#c8e6c9" rx="15" ry="15"/>
+  <text x="200" y="200" font-family="Arial" font-size="18" fill="#1b5e20" text-anchor="middle">Documentos</text>
+  <text x="200" y="230" font-family="Arial" font-size="14" fill="#1b5e20" text-anchor="middle">de Acción Local</text>
+  
+  <circle cx="100" cy="450" r="30" fill="#ffb74d" />
+  <text x="100" y="450" font-family="Arial" font-size="10" fill="#fff" text-anchor="middle" alignment-baseline="middle">Votación</text>
+  
+  <circle cx="200" cy="450" r="30" fill="#64b5f6" />
+  <text x="200" y="450" font-family="Arial" font-size="10" fill="#fff" text-anchor="middle" alignment-baseline="middle">Feedback</text>
+  
+  <circle cx="300" cy="450" r="30" fill="#ba68c8" />
+  <text x="300" y="450" font-family="Arial" font-size="10" fill="#fff" text-anchor="middle" alignment-baseline="middle">Colaboración</text>
+</svg>

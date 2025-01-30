@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}Políticas de Privacidad{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Color de fondo suave */
+            color: #333;
+        }
+
+        h1 {
+            color: #315fbf; /* Color para el <h1> */
+            text-align: center; /* Centrado del título principal */
+            font-size: 2rem;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #315fbf; /* Color para el <h2> */
+            font-size: 1.6rem;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        /* Estilos para el contenido principal */
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 50px;
+            background-color: white;
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        /* Estilo para los párrafos <p> */
+        p {
+            text-align: justify; /* Justificar el texto de los párrafos */
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo de los enlaces dentro del contenido */
+        a {
+            color: #315fbf;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* Media Queries para hacer la página responsiva */
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2rem; /* Reducir tamaño del h1 en pantallas más pequeñas */
+            }
+
+            h2 {
+                font-size: 1.5rem; /* Reducir tamaño del h2 en pantallas más pequeñas */
+            }
+
+            .content {
+                padding: 15px; /* Reducir el padding del contenido */
+            }
+
+        }
+    </style>
+    <body>
+        <div class="content">
+            <h1><strong>POLÍTICAS DE PRIVACIDAD</strong></h1>
+
+            <section>
+                <h2>Aviso de Privacidad</h2>
+                <p><strong>La Dirección Regional de Transformación Digital del Gobierno Regional de Cajamarca</strong>, con domicilio en Jr. Santa Teresa de Journet N°351, es responsable del tratamiento y protección de sus datos personales, conforme a lo establecido en la legislación vigente en materia de protección de datos personales. En este sentido, le informamos lo siguiente:<br>
+                Para llevar a cabo las finalidades descritas en el presente aviso de privacidad, se necesitarán datos personales de identificación y de contacto, tales como Nombres y apellidos, N° de DNI y correo electrónico. Asimismo, se podrán solicitar datos personales considerados como sensibles, como género. Estos datos serán solicitados únicamente si se obtiene su consentimiento previo, a través del formulario correspondiente, y serán tratados de manera disociada, lo que impedirá identificar a las personas titulares de los mismos.<br>
+                El fundamento legal que faculta al responsable para llevar a cabo el tratamiento de sus datos personales se establece en la legislación aplicable en nuestra región.<br>
+                Los datos personales que Usted proporcione serán utilizados para las finalidades derivadas de las acciones, programas, consultas, encuestas, talleres y otras iniciativas de participación ciudadana que se realicen dentro de la Dirección Regional de Transformación Digital, en colaboración con diferentes entidades públicas y organizaciones de la sociedad civil.<br>
+                Adicionalmente, sus datos personales podrán ser utilizados para crear estadísticas e informes que serán previamente disociados, de manera que no sea posible identificar a los titulares de los datos.<br>
+                Los datos personales también podrán ser utilizados para informarle sobre eventos futuros, como promociones, actividades deportivas y culturales, y otros informes de interés general relacionados con las actividades de la Dirección Regional de Transformación Digital, siempre salvaguardando su identidad.<br>
+                Si desea manifestar su negativa respecto al uso de sus datos para los fines mencionados, podrá hacerlo dirigiéndose a la <strong>Dirección Regional de Transformación Digital, 5° Piso </strong>, en Jr. Santa Teresa de Journet N°351, o bien, enviando un correo electrónico a <strong><a href="mailto:drtd@regioncajamarca.gob.pe">drtd@regioncajamarca.gob.pe</a></strong> con el <strong>Asunto: Negativa de uso de datos en página de Cajamarca Gobierno Abierto</strong> indicando: Nombres y apellidos completos, N° de DNI, lugar de residencia y una breve descripción de su negativa.<br>
+                Se informa que no se realizarán transferencias de datos personales, salvo aquellas que sean necesarias para atender requerimientos de información de una autoridad competente, que estén debidamente fundados y motivados.<br>
+                Si desea ejercer los <strong>"derechos ARCO" (Acceso, Rectificación, Cancelación u Oposición)</strong>, puede hacerlo directamente ante la Unidad de Transparencia del responsable o a través de la Plataforma Nacional de Transparencia.<br>
+                En caso de que exista un cambio en el presente aviso de privacidad, le será comunicado a través de los canales pertinentes.
+                </p>
+            </section>
+        </div>
+    </body>
+
+{% endblock %}

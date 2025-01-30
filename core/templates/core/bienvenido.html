@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Bienvenido{% endblock %}
+
+{% block content %}
+<style>
+    .h3a {
+            font-size: 2rem; /* Tamaño base */
+            color: #315fbf;
+            line-height: 1.5;
+            text-align: center;
+    }
+
+    .btn i {
+        font-size: 2rem;
+    }
+    .btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start; /* Empuja el contenido hacia arriba */
+        height: 170px; /* Un poco más alto */
+        padding: 10px;
+        gap: 5px; /* Espacio entre elementos */
+        }
+
+    .icon-img {
+        width: 70%; /* Aumenta el tamaño del icono */
+        max-height: 50px; /* Un poco más grande */
+        object-fit: contain;
+    }
+</style>
+<div class="content">
+<h3 class="h3a"><strong>TABLERO DE CONTROL</strong></h3>
+    <div class="row g-3">
+        <!-- Botón Persona -->
+        <div class="col-12 col-sm-6 col-md-4">
+            <a href="{% url 'core:persona_list' %}" class="btn btn-primary w-100 d-flex flex-column align-items-center py-3" style="height: 150px; text-decoration: none;">
+                <i class="bi bi-person-fill display-4 mb-3"></i>
+                <h3>Miembros del Foro</h3>
+                <img src="{% static 'img/personas.png' %}" alt="Icono" class="icon-img">
+            </a>
+        </div>
+
+        <!-- Botón Organización -->
+        <div class="col-12 col-sm-6 col-md-4">
+            <a href="{% url 'core:organizacion_lista' %}" class="btn btn-success w-100 d-flex flex-column align-items-center py-3" style="height: 150px; text-decoration: none;">
+                <i class="bi bi-building display-4 mb-3"></i>
+                <h3>Organizaciones</h3>
+                <img src="{% static 'img/organizaciones.png' %}" alt="Icono" class="icon-img">
+            </a>
+        </div>
+
+        <!-- Botón Documentos -->
+        <div class="col-12 col-sm-6 col-md-4">
+            <a href="{% url 'core:documentos_list' %}" class="btn btn-success w-100 d-flex flex-column align-items-center py-3" style="height: 150px; text-decoration: none;">
+                <i class="bi bi-gear-fill display-4 mb-3"></i>
+                <h3>Documentos</h3>
+                <img src="{% static 'img/documento.png' %}" alt="Icono" class="icon-img">
+            </a>
+        </div>
+
+        <!-- Botón USUARIOS -->
+        <div class="col-12 col-sm-6 col-md-4">
+            <a href="{% url 'core:usuarios_list' %}" class="btn btn-warning w-100 d-flex flex-column align-items-center py-3" style="height: 150px; text-decoration: none;">
+                <i class="bi bi-gear-fill display-4 mb-3"></i>
+                <h3>Usuarios</h3>
+                <img src="{% static 'img/personas.png' %}" alt="Icono" class="icon-img">
+            </a>
+        </div>
+
+        <!-- Botón Eje -->
+        <div class="col-12 col-sm-6 col-md-4">
+            <a href="{% url 'core:ejes_list' %}" class="btn btn-primary w-100 d-flex flex-column align-items-center py-3" style="height: 150px; text-decoration: none;">
+                <i class="bi bi-building display-4 mb-3"></i>
+                <h3>Ejes</h3>
+                <img src="{% static 'img/eje.png' %}" alt="Icono" class="icon-img">
+            </a>
+        </div>
+
+        <!-- Botón Compromiso -->
+        <div class="col-12 col-sm-6 col-md-4">
+            <a href="{% url 'core:lista_compromisos' %}" class="btn btn-success  w-100 d-flex flex-column align-items-center py-3" style="height: 150px; text-decoration: none;">
+                <i class="bi bi-person-fill display-4 mb-3"></i>
+                <h3>Compromisos</h3>
+                <img src="{% static 'img/compromisos.png' %}" alt="Icono" class="icon-img">
+            </a>
+        </div>
+        <!-- Botón EVENTOS -->
+        <div class="col-12 col-sm-6 col-md-4">
+            <a href="{% url 'core:eventos_lista' %}" class="btn btn-warning w-100 d-flex flex-column align-items-center py-3" style="height: 150px; text-decoration: none;">
+                <i class="bi bi-gear-fill display-4 mb-3"></i>
+                <h3>Eventos</h3>
+                <img src="{% static 'img/eventos.png' %}" alt="Icono" class="icon-img">
+            </a>
+        </div>
+        <!-- Botón Hitos -->
+        <div class="col-12 col-sm-6 col-md-4">
+            <a href="{% url 'core:hitos_lista' %}" class="btn btn-warning w-100 d-flex flex-column align-items-center py-3" style="height: 150px; text-decoration: none;">
+                <i class="bi bi-gear-fill display-4 mb-3"></i>
+                <h3>Hitos</h3>
+                <img src="{% static 'img/hito.png' %}" alt="Icono" class="icon-img">
+            </a>
+        </div>
+
+        <!-- Botón PERMISOS -->
+        <div class="col-12 col-sm-6 col-md-4">
+            <a href="/admin/" class="btn btn-primary w-100 d-flex flex-column align-items-center py-3" style="height: 150px; text-decoration: none;">
+                <i class="bi bi-gear-fill display-4 mb-3"></i>
+                <h3>Permisos</h3>
+                <img src="{% static 'img/proteger.png' %}" alt="Icono" class="icon-img">
+            </a>
+        </div>
+
+    </div>
+</div>
+<br>|
+{% endblock %}

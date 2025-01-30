@@ -1,0 +1,16 @@
+<svg width="400" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#fce4ec"/>
+  <text x="50%" y="40" font-family="Arial" font-size="24" fill="#c2185b" text-anchor="middle">Etapa de Evaluación</text>
+  
+  <rect x="100" y="100" width="200" height="400" fill="#f8bbd0" rx="15" ry="15"/>
+  <text x="200" y="150" font-family="Arial" font-size="18" fill="#880e4f" text-anchor="middle">Resultados Clave</text>
+  
+  <circle cx="100" cy="300" r="40" fill="#ab47bc" />
+  <text x="100" y="300" font-family="Arial" font-size="10" fill="#fff" text-anchor="middle" alignment-baseline="middle">Análisis</text>
+  
+  <circle cx="200" cy="300" r="40" fill="#42a5f5" />
+  <text x="200" y="300" font-family="Arial" font-size="10" fill="#fff" text-anchor="middle" alignment-baseline="middle">Informe</text>
+  
+  <circle cx="300" cy="300" r="40" fill="#ffca28" />
+  <text x="300" y="300" font-family="Arial" font-size="10" fill="#fff" text-anchor="middle" alignment-baseline="middle">Recomendaciones</text>
+</svg>

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Eliminar Organización{% endblock %}
+{% block content %}
+  <h1>¿Deseas eliminar la organización "{{ organizacion.razon_social }}"?</h1>
+  <form method="POST">
+      {% csrf_token %}
+      <button type="submit" class="delete-btn">Eliminar</button>
+      <a href="{% url 'core:organizacion_lista' %}" class="btn-primary">Cancelar</a>
+  </form>
+{% endblock %}

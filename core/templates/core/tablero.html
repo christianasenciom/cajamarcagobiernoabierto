@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Tablero de Monitoreo{% endblock %}
+
+{% block content %}
+<style>
+    .card {
+        border: none;
+        border-radius: 10px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-title {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .card-text {
+        font-size: 14px;
+    }
+
+    .cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .card-link {
+        text-decoration: none;
+        color: white;
+    }
+
+    .card-link:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="content">
+    <h1 class="text-center"><strong>TABLERO DE MONITOREO</strong></h1>
+    <p class="text-center text-muted">Compromisos 2024 - 2026</p>
+
+    <div class="cards-container mt-4">
+        {% for compromiso in compromisos %}
+        <div class="card" style="width: 18rem; background-color: {% cycle '#e0e330' '#50a859' '#3c5395' '#c42625' %};">
+            <div class="card-body text-black">
+                <h5 class="card-title">{{ compromiso.titulo }}</h5>
+                <p class="card-text text-black">Conoce más sobre la iniciativa</p>
+                <a href="{% url 'core:detalle-compromiso' compromiso.id %}" class="card-link">Click en el compromiso</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

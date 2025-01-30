@@ -1,0 +1,275 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Introducción{% endblock %}
+{% block content %}
+    <style>
+
+        h3 {
+            font-size: 2rem; /* Tamaño base */
+            color: #315fbf;
+            line-height: 1.5;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h2 {
+            font-size: 1.8rem; /* Tamaño base */
+            color: #315fbf;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            h3 {
+                font-size: 1.6rem; /* Disminuye ligeramente en pantallas medianas */
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h3 {
+                font-size: 1.4rem; /* Aún más pequeño en pantallas pequeñas */
+                text-align: left;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h3 {
+                font-size: 1.2rem; /* Ajuste para pantallas móviles */
+            }
+
+            h2 {
+                font-size: 1rem;
+            }
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Color de fondo suave */
+            color: #333;
+        }
+
+        h1 {
+            color: #315fbf; /* Color para el <h1> */
+            text-align: center; /* Centrado del título principal */
+            font-size: 2rem;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #315fbf; /* Color para el <h2> */
+            font-size: 1.6rem;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            text-align: justify;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: #315fbf;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media screen and (max-width: 768px) {
+
+            .content {
+                padding: 15px;
+            }
+
+        }
+
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f4f4f4;
+        }
+
+        header {
+          background-color: #315fbf;
+          color: white;
+          padding: 10px 0;
+          text-align: center;
+        }
+
+        h1 {
+          margin: 0;
+        }
+
+        .container {
+          width: 90%;
+          margin: 20px auto;
+        }
+
+        table {
+          width: 85%;
+          border-collapse: collapse;
+          margin: 20px auto;
+
+        }
+
+        th, td {
+          padding: 12px;
+          text-align: left;
+          border: 1px solid #ddd;
+        }
+
+        th {
+          background-color: #315fbf;
+          color: white;
+        }
+
+        td {
+          background-color: #f9f9f9;
+        }
+
+        @media (max-width: 768px) {
+          table, th, td {
+            display: block;
+            width: 100%;
+          }
+
+          th {
+            background-color: #ddd;
+          }
+
+          td {
+            text-align: right;
+            padding: 10px;
+          }
+
+          td:before {
+            content: attr(data-label);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+          }
+
+          tr {
+            margin-bottom: 15px;
+          }
+        }
+
+    </style>
+    <body>
+        <div class="content">
+            <h3><strong>FORO MULTIACTOR</strong></h3>
+            <div class="banner-container">
+                <img src="{% static 'img/foro.jpg' %}" alt="Banner" class="foro-img"><br><br>
+            </div>
+             <section>
+                <p class="phome">Un Foro Multiactor es un espacio estructurado y diseñado para maximizar la participación y la cooperación entre el Gobierno Regional de Cajamarca y actores no gubernamentales que se involucren en la toma de decisiones en el marco de las actividades del proceso de co-creación del Plan de Acción de Gobierno Abierto Cajamarca 2024 – 2026, así como la convocatoria a interlocutores relevantes en el debate y garantizar la pluralidad de voces. Es el pilar fundamental del éxito de la participación de cada jurisdicción en la Alianza para el Gobierno Abierto y es imprescindible para plantear reformas colaborativas en el marco del gobierno abierto.</p>
+            </section><br>
+            <section>
+                <p class="phome">El Foro Multiactor de Gobierno Abierto Cajamarca es el grupo de toma de decisión más importante en el Gobierno Regional de Cajamarca para el Gobierno Abierto y está compuesto por 16 miembros que cuentan con voz y voto, distribuidos de la siguiente manera:</p>
+            </section><br>
+            <section>
+                <h2><strong>ACTORES DEL GOBIERNO REGIONAL DE CAJAMARCA</strong></h2>
+                <table class="table table-responsive">
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>Gerencia General Regional (GGR): Titular y alterno</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>Sub Gerencia de Planeamiento y Cooperación Técnica Internacional (SGPCTI): Titular</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>Gerencia Regional de Desarrollo Social (GRDS): Titular y alterno</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>Dirección Regional de Educación (DRE CAJ): Titular y alterno</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>Dirección Regional de Transformación Digital (DRTD): Titular y alterno</td>
+                    </tr>
+                    <tr>
+                      <td>6</td>
+                      <td>Subgerencia de Programación e Inversión Pública (OPMI): Titular y alterno</td>
+                    </tr>
+                    <tr>
+                      <td>7</td>
+                      <td>Unidad Formuladora de Inversiones Sociales (UFIS): Titular y alterno</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <h2><strong>ACTORES DE LA SOCIEDAD CIVIL</strong></h2>
+                <table class="table table-responsive">
+
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>Proética - Capítulo Peruano de Transparencia Internacional: Titular y alterno</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>Centro Ecuménico de Promoción y Acción Social Norte - CEDEPAS Norte: Titular y alterno</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>Asociación Familia Sana (AFS): Titular y alterno</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>Mesa de Concertación de Lucha para la Pobreza Cajamarca (MCLCP): Titular y alterno</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>Asociación Servicios Educativos Rurales (Asoc. SER): Titular y alterno</td>
+                    </tr>
+                    <tr>
+                      <td>6</td>
+                      <td>Consejo Regional de la Juventud de Cajamarca (COREJU): Titular y alterno</td>
+                    </tr>
+                    <tr>
+                      <td>7</td>
+                      <td>Consejo Regional de Decanos de Cajamarca (CONREDE): Titular y alterno</td>
+                    </tr>
+                    <tr>
+                      <td>8</td>
+                      <td>Cámara de Comercio y Producción de Cajamarca (CCP CAJ): Titular y alterno</td>
+                    </tr>
+                    <tr>
+                      <td>9</td>
+                      <td>Asociación los Andes de Cajamarca (ALAC): Titular</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </section>
+            <section>
+                <h2><strong>ESTRUCTURA DEL FORO</strong></h2>
+                <img src="{% static 'img/estructura.png' %}" alt="Banner" class="estructura-img"><br>
+            </section>
+            <section>
+                <h2><strong>FUNCIONAMIENTO DEL FORO</strong></h2>
+                <p class="phome">El Foro se reúne de manera ordinaria o extraordinaria (a solicitud de los miembros) para la co-creación del Plan de Acción, se determinaron 4 sesiones ordinarias. Por otra parte, el Foro se reúne de manera trimestral en la implementación del Plan de Acción con el fin de dar a conocer los avances de ejecución de los compromisos entre otras coordinaciones que mejoren la implementación.
+                Todas las reuniones del Foro, ya sean oficiales o extraordinarias son documentadas en un formato especial que será transparentado en la página web de Gobierno Abierto del Gobierno Regional de Cajamarca.
+                </p>
+            </section><br>
+
+        </div>
+    </body>
+{% endblock %}

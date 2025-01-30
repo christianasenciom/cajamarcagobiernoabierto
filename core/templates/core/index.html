@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>¡Bienvenido al sistema!</h1>
+    <p>Accede a los ejes y compromisos desde el menú de navegación.</p>
+    <a href="{% url 'core:ejes_list' %}" class="btn btn-primary">Explorar Ejes</a>
+</div>
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle del Compromiso{% endblock %}
+
+{% block content %}
+<style>
+    .container-detalle {
+        display: flex;
+        gap: 20px;
+    }
+
+    .sidebar {
+        width: 25%;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .content {
+        width: 75%;
+    }
+
+    .progress-circle {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: conic-gradient(#3498db {{ porcentaje }}%, #ddd {{ porcentaje }}%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 20px auto;
+    }
+
+    .progress-circle span {
+        position: absolute;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .card {
+        border: none;
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 8px;
+        background-color: #f1f1f1;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .table th, .table td {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    h2, h3 {
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+    }
+
+    .icon-link {
+        font-size: 20px;
+        color: #3498db;
+        text-decoration: none;
+    }
+
+    .icon-link:hover {
+        color: #2980b9;
+    }
+</style>
+
+<div class="container mt-5">
+    <h1 class="text-primary">Compromiso: {{ compromiso.titulo }}</h1>
+    <div class="container-detalle">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="progress-circle">
+                <span>{{ porcentaje }}%</span>
+            </div>
+            <h5>Avance</h5>
+            <p>{{ compromiso.estado }}</p>
+            <hr>
+            <h5>Área Responsable</h5>
+            <p>{{ compromiso.area_responsable }}</p>
+            <hr>
+            <h5>Área Responsable del Gobierno Regional</h5>
+            <p>{{ compromiso.responsables }}</p>
+            <hr>
+            <h5>Información de contacto</h5>
+            <p>Correo: {{ compromiso.correo_contacto }}</p>
+            <p>Tel: {{ compromiso.telefono_contacto }}</p>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <h2>Título de Compromiso</h2>
+            <p>{{ compromiso.titulo }}</p>
+
+            <h2>Eje</h2>
+            <p>{{ compromiso.eje.nombre }}</p>
+
+            <h2>Descripción del Compromiso</h2>
+            <p>1. Problema: {{ compromiso.problema }}</p>
+            <p>2. Estado inicial: {{ compromiso.estado_inicial }}</p>
+            <p>3. Acción: {{ compromiso.accion }}</p>
+
+            <h2>Relevancia con los Valores del Gobierno Abierto</h2>
+            <p>{{ compromiso.relevancia }}</p>
+
+            <h2>Otros Actores</h2>
+            <p>{{ compromiso.otros_actores }}</p>
+
+            <h2>Hitos</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Hito</th>
+                        <th>Estado del Compromiso</th>
+                        <th>Fecha de Inicio</th>
+                        <th>Fecha Final</th>
+                        <th>Avances</th>
+                        <th>Evidencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for hito in compromiso.hitos.all %}
+                    <tr>
+                        <td>{{ hito.titulo }}</td>
+                        <td>{{ hito.estado }}</td>
+                        <td>{{ hito.fecha_inicio }}</td>
+                        <td>{{ hito.fecha_final }}</td>
+                        <td>{{ hito.avance }}%</td>
+                        <td><a href="{{ hito.evidencia }}" target="_blank" class="icon-link"><i class="fas fa-search"></i></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

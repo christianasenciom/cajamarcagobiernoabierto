@@ -1,0 +1,414 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio - Cajamarca Gobierno Abierto{% endblock %}
+{% load static %}
+{% block content %}
+<style>
+    /* Asegurar que todas las imágenes tengan el mismo tamaño */
+    .fixed-size {
+        width: 100%;
+        height: 400px; /* Ajusta la altura según lo necesites */
+        object-fit: cover; /* Recorta la imagen manteniendo su proporción */
+    }
+
+    /* Mantener el texto centrado y fijo */
+    .carousel-text {
+        position: absolute;
+        top: 90%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 50px;
+        color: white;
+        font-weight: bold;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-align: center;
+        width: max-content;
+    }
+
+    /* Ajustar el contenedor para evitar cambios de altura */
+    .banner-container {
+        position: relative;
+        width: 100%;
+        height: 400px; /* Igual a la altura de las imágenes */
+        overflow: hidden;
+    }
+
+         /* Estilo para el contenedor de las tarjetas */
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px; /* Espacio entre las tarjetas */
+        justify-content: center;
+        padding: 20px;
+    }
+
+    /* Estilo para cada tarjeta */
+    .card {
+        background-color: #fff;
+        border: 2px solid #315fbf;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 250px; /* Ancho estándar de las tarjetas */
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+
+    /* Animación al pasar el mouse sobre la tarjeta */
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Estilo para el encabezado de la tarjeta */
+    .card-header h2,
+    .card-header h3 {
+        font-size: 15px;
+        font-weight: bold;
+        margin: 5px 0;
+    }
+
+    /* Estilo para el contenido del cuerpo de la tarjeta */
+    .card-body h4,
+    .card-body h5 {
+        font-size: 15px; /* Tamaño de fuente estándar */
+        margin: 5px 0;
+    }
+    h3 {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    @media (max-width: 1024px) {
+            h3 {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h3 {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h3 {
+                font-size: 0.9rem;
+            }
+        }
+
+
+    /* Responsividad */
+    @media (max-width: 768px) {
+        .card {
+            width: 100%;
+        }
+    }
+
+    @media (min-width: 769px) {
+        .card {
+            width: 23%; /* Tres tarjetas por fila en pantallas más grandes */
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .card {
+            width: 22%; /* Cuatro tarjetas por fila en pantallas grandes */
+        }
+    }
+    .card-footer {
+        padding: 0;
+        text-align: center;
+        background-color: #f1f1f1;
+        background-image: url('/static/img/colores.png');
+        background-size: cover;
+        background-position: center;  /* Centra la imagen */
+        background-repeat: no-repeat;
+        height: 30px;
+    }
+
+    .timeline {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 20px; /* Espacio de 20px entre los elementos */
+        overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
+        padding: 10px 0; /* Espaciado vertical dentro del contenedor */
+        border-bottom: none; /* Elimina cualquier línea horizontal */
+    }
+
+    .timeline-item {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 230px; /* Ancho mínimo para cada elemento */
+    }
+
+    .timeline-content {
+        background: white;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: left; /* Alinea el texto a la izquierda */
+        width: 100%;
+    }
+
+    .timeline-content h6 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .timeline-content p {
+        font-size: 1rem;
+        color: #6c757d;
+        margin-bottom: 15px;
+    }
+
+    .timeline-content img {
+        width: 100%;
+        height: auto;
+        margin-top: 10px;
+        border-radius: 5px;
+        transform: scale(1.1); /* Aumenta el tamaño de la imagen en un 10% */
+    }
+    .modal-content {
+        background-image: url("{% static 'img/banner.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        font-size: 20px;
+        background-repeat: no-repeat;
+        color: WHITE;
+    }
+
+</style>
+    <div class="banner-container position-relative">
+        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="5000">
+                    <img src="{% static 'img/banner.jpg' %}" class="d-block w-100 fixed-size" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <img src="{% static 'img/ban.jpg' %}" class="d-block w-100 fixed-size" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <img src="{% static 'img/plaza.jpg' %}" class="d-block w-100 fixed-size" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <!-- Texto centrado sobre las imágenes -->
+        <div class="carousel-text">
+            GOBIERNO ABIERTO CAJAMARCA
+        </div>
+    </div>
+
+    <div class="content" >
+        <h1 class="h1hometitle"><strong>CALENDARIO DEL PLAN DE ACCIÓN</strong></h1>
+        <section>
+            <div class="card-container">
+                <!-- Evento 1 (CO-CREACIÓN) -->
+                <div class="card" data-bs-toggle="modal" data-bs-target="#modalCoCreacion">
+                    <div class="card-header">
+                        <h2 class="h3timeline"><strong>CO-CREACIÓN</strong></h2>
+                    </div>
+                    <div class="card-body">
+                        <h4>19 nov - 31 ene</h4>
+                        <h5>2 meses y medio</h5>
+                    </div>
+                    <div class="card-footer">
+                    </div>
+                </div>
+
+                <!-- Evento 3 -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="h3timeline"><strong>IMPLEMENTACIÓN</strong></h3>
+                    </div>
+                    <div class="card-body">
+                        <h4>ene 2025 - jun 2026</h4>
+                        <h5>18 meseses</h5>
+                    </div>
+                    <div class="card-footer">
+                    </div>
+                </div>
+
+                <!-- Evento 4 -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="h3timeline"><strong>EVALUACIÓN</strong></h3>
+                    </div>
+                    <div class="card-body">
+                        <h4>jul - sep 2026</h4>
+                        <h5>3 meses</h5>
+                    </div>
+                    <div class="card-footer">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="modalCoCreacion" tabindex="-1" aria-labelledby="modalCoCreacionLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content animate__animated animate__fadeIn">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalCoCreacionLabel"><strong>CO-CREACIÓN</strong></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <h3><strong>CONSÚLTA PÚBLICA</strong></h3>
+                                    <p>26 – 29 de noviembre 2024</p>
+                                    <img src="{% static 'img/ban.jpg' %}" class="img-fluid rounded" alt="Consulta Pública">
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <h3><strong>MESAS DE CO-CREACIÓN</strong></h3>
+                                    <p>16 de diciembre 2024</p>
+                                    <img src="{% static 'img/ban.jpg' %}" class="img-fluid rounded" alt="Mesas de Co-Creación">
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <h3><strong>REVISIÓN PÚBLICA</strong></h3>
+                                    <p>16 al 22 de enero 2025</p>
+                                    <img src="{% static 'img/ban.jpg' %}" class="img-fluid rounded" alt="Revisión Pública">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <br>
+        <section>
+            <h1 class="h1home">¿Qué es el Gobierno Abierto?</h1>
+            <p class="phome">Es un paradigma basado en valores que busca transformar  la relación entre ciudadanos y gobierno. El Gobierno Abierto consiste en mejorar la transparencia de la Administración Pública, garantizar oportunidades de participación ciudadana en los asuntos públicos y reforzar mecanismos de rendición pública de cuentas. Nace de la evidencia del retroceso democrático, como una receta de respuesta de los gobiernos a problemas sistémicos como el cambio climático, la desigualdad y conflictos en un territorio.</p>
+        </section>
+        <br>
+        <section>
+            <h1 class="h1home">Pilares de Gobierno Abierto</h1>
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th><h4 class="h4tabla">PILAR</h4></th>
+                        <th><h4 class="h4tabla">OBJETIVO</h4></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Transparencia</td>
+                        <td>Toda persona puede acceder a información pertinente, utilizable y oportuna sobre procesos y decisiones gubernamentales que afectan su vida.</td>
+                    </tr>
+                    <tr>
+                        <td>Rendición de cuentas</td>
+                        <td>Toda persona tiene la libertad y la capacidad de buscar una reparación efectiva cuando no se respeta el estado de derecho, no se respetan sus derechos o no se satisfacen sus necesidades, sin riesgo ni perjuicio. Los funcionarios públicos son responsables de sus decisiones y acciones.</td>
+                    </tr>
+                    <tr>
+                        <td>Participación Ciudadana</td>
+                        <td>Toda persona tiene las mismas oportunidades de participar libremente en la elaboración de las políticas y decisiones públicas que afectan a su vida</td>
+                    </tr>
+                    <tr>
+                        <td>Innovación</td>
+                        <td>La innovación se entiende como la transformación o generación de procesos nuevos, dentro de los que destacan la creatividad, la mejora continua y la sostenibilidad.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <br>
+        <br>
+        <section>
+            <h1 class="h1home">Open Government Partnership</h1>
+            <p class="p">OGP fue fundada en 2011 por 08 líderes gubernamentales y 09 de la sociedad civil de diferentes países del mundo. La misión de OGP es inspirar, conectar y fortalecer las capacidades de una comunidad cada vez más grande de reformadores de gobierno y la sociedad civil para que actúen juntos y alcancen la visión del gobierno abierto. </p>
+            <div class="image-container">
+                <img src="{% static 'img/ogppa.png' %}" alt="Logo Alianza Gobierno Abierto" class="small-image">
+            </div>
+        </section>
+        <br>
+        <br>
+        <section>
+            <h1 class="h1home">OGP Local</h1>
+            <p class="p">"OGP local" es el programa insignia para gobiernos subnacionales de la Alianza para el Gobierno Abierto, que reúne 150 gobiernos locales. Su propósito es co-crear reformas transformadoras para abrir los gobiernos y responder mejor a las necesidades de la ciudadanía.</p>
+            <div class="image-container">
+                <img src="{% static 'img/ogp.png' %}" alt="Logo Alianza Gobierno Abierto" class="small-image1">
+            </div>
+        </section>
+        <br>
+        <br>
+        <section>
+            <h1 class="h1home">Plan de Acción Local de Gobierno Abierto (PAL)</h1>
+            <p class="p">En el marco del programa OGP Local de la Open Government Partnership (OGP, por sus siglas en inglés) el Foro Multiactor de Gobierno Abierto co-creará un Plan de Acción de Gobierno Abierto donde se plasmarán compromisos generados de manera colaborativa entre gobierno y sociedad civil, siguiendo los principios de Gobierno Abierto: Transparencia, Rendición de cuentas, Participación e Innovación.</p>
+            <!--<div class="image-container">
+                <img src="{% static 'img/ogp.png' %}" alt="Logo Alianza Gobierno Abierto" class="small-image1">
+            </div>-->
+        </section>
+        <br>
+        <br>
+        <section>
+            <h1 class="h1home">Foro Multiactor de Gobierno Abierto Cajamarca</h1>
+            <p class="p">El equipo impulsor y coordinador del Plan de Acción de Gobierno Abierto 2024-2026 luego de realizar un taller de sensibilización a actores del Gobierno Regional de Cajamarca y actores no gubernamentales logró identificar a quienes conformarán el Foro Multiactor de Gobierno Abierto Cajamarca, conformado por:</p></BR>
+            <table class="table table-responsive">
+                <tr>
+                    <th><h4 class="h4tabla">DEPENDENCIAS DEL GOBIERNO REGIONAL</h4></th>
+                    <th><h4 class="h4tabla">ACTORES NO GUBERNAMENTALES</h4></th>
+                </tr>
+                <tr>
+                    <td><p class="phome">Gerencia General Regional</p></td>
+                    <td><p class="phome">Proética - Capítulo Peruano de Transparencia Internacional</p></td>
+                </tr>
+                <tr>
+                    <td><p class="phome">Sub Gerencia de Planeamiento y Cooperación Técnica Internacional</p></td>
+                    <td><p class="phome">Centro Ecuménico de Promoción y Acción Social Norte - Cedepas Norte</p></td>
+                </tr>
+                <tr>
+                    <td><p class="phome">Gerencia Regional de Desarrollo Social</p></td>
+                    <td><p class="phome">Asociación Familia Sana</p></td>
+                </tr>
+                <tr>
+                    <td><p class="phome">Dirección Regional de Educación</p></td>
+                    <td><p class="phome">Mesa de Concertación de Lucha para la Pobreza Cajamarca</p></td>
+                </tr>
+                <tr>
+                    <td><p class="phome">Dirección Regional de Transformación Digital</p></td>
+                    <td><p class="phome">Asociación Servicios Educativos Rurales – SER</p></td>
+                </tr>
+                <tr>
+                    <td><p class="phome">Subgerencia de Programación e Inversión Pública</p></td>
+                    <td><p class="phome">Consejo Regional de la Juventud de Cajamarca – COREJU</p></td>
+                </tr>
+                <tr>
+                    <td><p class="phome">Unidad Formuladora de Inversiones Sociales</p></td>
+                    <td><p class="phome">Consejo Regional de Decanos de Cajamarca – CONREDE</p></td>
+                </tr>
+                <tr>
+                    <td><p class="phome"> - </p></td>
+                    <td><p class="phome">Asociación los Andes de Cajamarca</p></td>
+                </tr>
+                <td><p class="phome"> - </p></td>
+                    <td><p class="phome">Cámara de Comercio y Producción de Cajamarca</p></td>
+            </table>
+            <div class="image-container">
+                <img src="{% static 'img/foro.jpg' %}" alt="Foto GAC" class="small-image2">
+            </div>
+        </section>
+        <br>
+        <br>
+
+    </div>
+{% endblock %}

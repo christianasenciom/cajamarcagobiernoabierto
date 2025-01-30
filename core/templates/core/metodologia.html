@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Metodología{% endblock %}
+{% block content %}
+    <style>
+
+        .banner-container {
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden; /* Evita que el contenido se desborde */
+        }
+
+        .banner-img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px; /* Bordes redondeados */
+        }
+
+
+        h3 {
+            font-size: 2rem; /* Tamaño base */
+            color: #315fbf;
+            line-height: 1.5;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h2 {
+            font-size: 1.8rem; /* Tamaño base */
+            color: #315fbf;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            h3 {
+                font-size: 1.6rem; /* Disminuye ligeramente en pantallas medianas */
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h3 {
+                font-size: 1.4rem; /* Aún más pequeño en pantallas pequeñas */
+                text-align: left;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h3 {
+                font-size: 1.2rem; /* Ajuste para pantallas móviles */
+            }
+
+            h2 {
+                font-size: 1rem;
+            }
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Color de fondo suave */
+            color: #333;
+        }
+
+        h1 {
+            color: #315fbf; /* Color para el <h1> */
+            text-align: center; /* Centrado del título principal */
+            font-size: 2rem;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #315fbf; /* Color para el <h2> */
+            font-size: 1.6rem;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+
+        .content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 50px;
+            background-color: white;
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Estilo para los párrafos <p> */
+        p {
+            text-align: justify;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+
+        a {
+            color: #315fbf;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+
+
+        @media screen and (max-width: 768px) {
+
+            .content {
+                padding: 15px;
+            }
+
+        }
+    </style>
+    <body>
+        <div class="content">
+            <h3><strong>METODOLOGÍA</strong></h3>
+            <p>
+                La metodología de la construcción del Plan de Acción de Gobierno Abierto Cajamarca 2024 – 2026 consta de las siguientes etapas:  co-creación, implementación y evaluación del Plan. </p>
+            <div class="banner-container">
+                <img src="{% static 'img/etapas.svg' %}" alt="Banner" class="banner-etapas">
+            </div>
+            <p>
+                La metodología establece 11 pasos clave para el desarrollo del Plan de Acción:
+            </p>
+            <p>
+                1.	Definición de ejes temáticos<br>
+                2.	Consultas públicas y sistematización de sus resultados<br>
+                3.	Mesas de co-creación<br>
+                4.	Retroalimentación de compromisos OGP<br>
+                5.	Revisión, mejora de los compromisos y elaboración de hitos por parte de las áreas implementadoras<br>
+                6.	Retroalimentación de compromisos Foro Multiactor<br>
+                7.	Revisión pública de Plantillas OGP de los compromisos<br>
+                8.	Carga de información en OGP<br>
+                9.	Socialización y difusión del Plan de Acción<br>
+                10.	Implementación<br>
+                11.	Evaluación
+
+            </p>
+        </div>
+    </body>
+{% endblock %}

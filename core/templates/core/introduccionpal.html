@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Introducción al Plan de Acción{% endblock %}
+{% block content %}
+    <style>
+
+        h3 {
+            font-size: 2rem; /* Tamaño base */
+            color: #315fbf;
+            line-height: 1.5;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h2 {
+            font-size: 1.8rem; /* Tamaño base */
+            color: #315fbf;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            h3 {
+                font-size: 1.6rem; /* Disminuye ligeramente en pantallas medianas */
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h3 {
+                font-size: 1.4rem; /* Aún más pequeño en pantallas pequeñas */
+                text-align: left;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h3 {
+                font-size: 1.2rem; /* Ajuste para pantallas móviles */
+            }
+
+            h2 {
+                font-size: 1rem;
+            }
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Color de fondo suave */
+            color: #333;
+        }
+
+        h1 {
+            color: #315fbf; /* Color para el <h1> */
+            text-align: center; /* Centrado del título principal */
+            font-size: 2rem;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #315fbf; /* Color para el <h2> */
+            font-size: 1.6rem;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+
+        .content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 50px;
+            background-color: white;
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Estilo para los párrafos <p> */
+        p {
+            text-align: justify;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+
+        a {
+            color: #315fbf;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+
+
+        @media screen and (max-width: 768px) {
+
+            .content {
+                padding: 15px;
+            }
+
+        }
+    </style>
+    <body>
+        <div class="content">
+            <h3><strong>INTRODUCCIÓN AL PLAN DE ACCIÓN</strong></h3>
+            <div class="banner-container">
+                <h3>¿Qué es un Plan de Acción de Gobierno Abierto?</h3>
+            </div>
+            <p>
+                Los planes de acción son el núcleo de la participación en la Alianza para el Gobierno Abierto. Se crean combinando las fuerzas del gobierno y la sociedad civil, trabajando juntos para definir compromisos ambiciosos en una variedad de temas.
+                Se considera que los miembros participan oficialmente en la Alianza para el Gobierno Abierto una vez que han comenzado a consultar con organizaciones de la sociedad civil para desarrollar un plan de acción.
+                Siguiendo la metodología del Programa OGP Local, un Plan de Acción Local se entiende además como el documento que si bien atiende problemas públicos con compromisos puntuales en materia de transparencia, rendición de cuentas, participación e innovación, se enmarca en una temporalidad específica (generalmente de 1 a 2 años) y se centra en una localidad de nivel subnacional como un estado, municipio, distrito o departamento.
+            </p><br>
+            <h3><strong>DESCARGA EL PLAN DE ACCIÓN 2024 - 2026</strong></h3>
+            <a href="https://www.facebook.com" target="_blank"><strong>CLICK AQUÍ</strong></a>
+        </div>
+    </body>
+{% endblock %}

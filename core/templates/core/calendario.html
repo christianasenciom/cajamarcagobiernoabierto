@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block title %}Calendario{% endblock %}
+
+{% block content %}
+<style>
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        padding: 20px;
+    }
+    .card {
+        width: 300px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+    .card-header {
+        background-color: #315fbf;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+    .card-body {
+        padding: 10px;
+        font-size: 10px;
+    }
+
+    h3 {
+      font-size: 1.3em;
+
+  }
+
+  h1 {
+            font-size: 2rem; /* Tamaño base */
+            color: #315fbf;
+            line-height: 1.5;
+            text-align: center;
+            margin-bottom: 40px;
+  }
+
+  p {
+      font-size: 0.8em;
+  }
+
+        @media (max-width: 1024px) {
+            h3 {
+                font-size: 0.9rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h3 {
+                font-size: 0.8rem;
+                text-align: left;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h3 {
+                font-size: 0.7rem; /* Ajuste para pantallas móviles */
+            }
+
+            h1 {
+                font-size: 1.3rem;
+            }
+        }
+
+
+    .card-footer {
+        padding: 10px;
+        text-align: center;
+        background-color: #f1f1f1;
+    }
+    .fecha-pasada {
+        color: red;
+        font-weight: bold;
+    }
+    .fecha-en-curso {
+        color: orange;
+        font-weight: bold;
+    }
+    .fecha-futura {
+        color: green;
+        font-weight: bold;
+    }
+    .sin-fecha {
+        color: red;
+        font-weight: bold;
+    }
+</style>
+<div class="content">
+    <h1><strong>CALENDARIO ({{ eventos.count }} eventos) </strong></h1>
+    <div class="card-container">
+        {% for evento in eventos %}
+        <div class="card">
+            <div class="card-header">
+                <strong>{{ evento.nombre_evento }}</strong>
+            </div>
+            <div class="card-body">
+
+                <h3><strong>Detalles:</strong> {{ evento.detalle }}</h3>
+                <h3>
+                    <i class="bi bi-calendar3"></i>
+                    <span class="{% if evento.estado == 'pasada' %}fecha-pasada
+                                 {% elif evento.estado == 'en_curso' %}fecha-en-curso
+                                 {% elif evento.estado == 'futura' %}fecha-futura
+                                 {% else %}sin-fecha{% endif %}">
+                        {% if evento.fechainicio %}{{ evento.fechainicio }}{% if evento.fechafin %} - {{ evento.fechafin }}{% endif %}
+                        {% else %}Fecha no disponible{% endif %}
+                    </span><br>
+                <h3><i><strong>Hora:</strong> {{ evento.horainicio }} - {{ evento.horafin }}</i></h3>
+                </h3>
+
+                {% if evento.direccion %}
+                <h3><strong>Lugar:</strong> {{ evento.direccion }}</h3>
+                {% endif %}
+
+            </div>
+            <div class="card-footer">
+                {% if evento.url %}
+                <a href="{{ evento.url }}" target="_blank" class="btn btn-primary btn-sm">Más información</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

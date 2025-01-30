@@ -1,0 +1,9 @@
+__pycache__/
+*.sqlite3
+.env
+venv/
+db.sqlite3
+*.log
+
+*.svg binary
+*.xml text eol=lf

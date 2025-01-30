@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalles del Compromiso{% endblock %}
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url("{% static 'img/banner.jpg' %}"); /* Ruta del banner */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: #333;
+
+        .h3a {
+        font-size: 2rem; /* Tamaño base */
+        color: #315fbf;
+        line-height: 1.5;
+        text-align: center;
+        }
+
+    }
+
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<div class="container mt-5">
+    <div class="card shadow-sm p-4">
+        <h3 class="h3a">DETALLE DEL COMPROMISO</h3>
+
+        <!-- Información del compromiso -->
+        <div class="mb-4">
+            <p><strong>Título:</strong> {{ compromiso.titulo }}</p>
+            <p><strong>Descripción:</strong> {{ compromiso.descripcion }}</p>
+            <p><strong>Área Responsable:</strong> {{ compromiso.area_responsable }}</p>
+            <p><strong>Avance:</strong>
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ compromiso.avance }}%;" aria-valuenow="{{ compromiso.avance }}" aria-valuemin="0" aria-valuemax="100">
+                        {{ compromiso.avance }}%
+                    </div>
+                </div>
+            </p>
+        </div>
+
+        <!-- Lista de hitos asociados -->
+        <div class="hitos-section">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="text-secondary mb-0">Hitos Asociados</h2>
+                <!-- Botón para agregar hito -->
+                <a href="{% url 'core:agregar_hito' %}" class="btn btn-primary btn-sm d-flex align-items-center">
+                    <i class="fas fa-plus me-2"></i>
+                    Agregar Hito
+                </a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Título</th>
+                            <th>Estado</th>
+                            <th>Fecha Límite</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for hito in compromiso.hitos.all %}
+                        <tr>
+                            <td>{{ hito.titulo }}</td>
+                            <td>
+                                <span class="badge {% if hito.estado == 'Completado' %}bg-success{% elif hito.estado == 'En progreso' %}bg-warning{% else %}bg-danger{% endif %}">
+                                    {{ hito.estado }}
+                                </span>
+                            </td>
+                            <td>{{ hito.fecha_limite }}</td>
+                            <td class="text-center">
+                                <form action="{% url 'core:eliminar_hito' hito.id %}" method="post" class="d-inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este hito?');">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center">No hay hitos asociados a este compromiso.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Botón para volver -->
+        <div class="mt-4 text-center">
+            <a href="{% url 'core:lista_compromisos' %}" class="btn btn-secondary">Volver a la Lista de Compromisos</a>
+        </div>
+    </div>
+</div>
+
+<!-- Script para mejorar la responsividad y agregar interactividad -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Puedes agregar lógica adicional aquí si necesitas.
+</script>
+{% endblock %}

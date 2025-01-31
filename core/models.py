@@ -166,6 +166,14 @@ class Voto(models.Model):
         return f"Vote by {self.user.username} on {self.project.title}"
 
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='user_photos/', default='user_photos/user.png')
+
+    def __str__(self):
+        return f'Perfil de {self.user.username}'
+
+
 
 
 

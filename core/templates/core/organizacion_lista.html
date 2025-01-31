@@ -1,54 +1,65 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Lista de Organizaciones{% endblock %}
+
 {% block content %}
-   <style>
-   .h3a {
-            font-size: 2rem; /* Tamaño base */
-            color: #315fbf;
-            line-height: 1.5;
-            text-align: center;
+<style>
+    .h3a {
+        font-size: 2rem;
+        color: #315fbf;
+        line-height: 1.5;
+        text-align: center;
     }
-    /* General Styles */
+
     body {
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-        background-color: #f9f9f9;
+        background-image: url("{% static 'img/banner.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
         color: #333;
     }
 
-    h1 {
-        text-align: center;
-        margin-top: 20px;
-        color: #444;
+    .table-container {
+        overflow-x: auto;
     }
 
     table {
         width: 100%;
         border-collapse: collapse;
-        margin: 20px 0;
-        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
     }
 
-    table th, table td {
+    table, th, td {
         border: 1px solid #ddd;
-        padding: 10px;
+    }
+
+    th, td {
+        padding: 12px 15px;
         text-align: left;
     }
 
-    table th {
-        background-color: #315fbf;
-        color: white;
+    th {
+        background-color: #f8f9fa;
+        color: #333;
     }
 
-    table tbody tr:nth-child(even) {
-        background-color: #f2f2f2;
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
     }
 
     .pagination {
         display: flex;
         justify-content: center;
-        list-style: none;
+        margin: 20px 0;
+        list-style-type: none;
         padding: 0;
     }
 
@@ -56,149 +67,165 @@
         margin: 0 5px;
     }
 
-    .pagination li a, .pagination li span {
-        padding: 8px 12px;
-        text-decoration: none;
-        color: #315fbf;
-        border: 1px solid #315fbf;
-        border-radius: 4px;
-    }
-
-    .pagination li a:hover {
-        background-color: #315fbf;
-        color: white;
-    }
-
-    .btn-primary, .edit-btn, .delete-btn {
+    .pagination a {
         text-decoration: none;
         padding: 8px 12px;
+        border: 1px solid #ddd;
+        color: #007bff;
         border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .pagination a:hover, .pagination .active {
+        background-color: #007bff;
         color: white;
-        background-color: #315fbf;
-        border: none;
-        display: inline-block;
+        border: 1px solid #007bff;
+    }
+
+    .actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .actions a {
+        text-decoration: none;
+        color: white;
+        padding: 8px;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s, transform 0.2s;
     }
 
     .edit-btn {
-        background-color: #315fbf;
+        background-color: #ffc107;
+    }
+
+    .edit-btn:hover {
+        background-color: #e0a800;
+        transform: scale(1.1);
     }
 
     .delete-btn {
-        background-color: #f44336;
+        background-color: #dc3545;
     }
 
-    .btn-primary:hover, .edit-btn:hover, .delete-btn:hover {
-        opacity: 0.9;
+    .delete-btn:hover {
+        background-color: #c82333;
+        transform: scale(1.1);
     }
 
-    /* Responsive Design */
-    @media screen and (max-width: 768px) {
-        table, thead, tbody, th, td, tr {
-            display: block;
-            width: 100%;
+    .btn-primary {
+        display: inline-block;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        font-size: 14px;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    @media (max-width: 768px) {
+        table, th, td {
+            padding: 8px;
         }
 
-        table thead tr {
-            display: none;
+        .pagination a {
+            font-size: 12px;
+            padding: 6px 10px;
         }
 
-        table td {
-            border: none;
-            position: relative;
-            padding-left: 50%;
-            text-align: right;
+        .btn-primary {
+            font-size: 12px;
+            padding: 8px 12px;
         }
 
-        table td:before {
-            content: attr(data-label);
-            position: absolute;
-            left: 10px;
-            width: 45%;
-            text-align: left;
-            font-weight: bold;
-        }
-
-
-
-        .pagination {
-            flex-wrap: wrap;
-        }
-
-        .pagination li {
-            margin: 5px;
+        .actions a {
+            font-size: 14px;
+            padding: 6px;
         }
     }
-    </style>
+</style>
 
-  <h3 class="h3a"><strong>ORGANIZACIONES</strong></h3>
+<div class="content">
+    <h3 class="h3a"><strong>ORGANIZACIONES</strong></h3>
 
-  <div style="text-align: center; margin-bottom: 20px;">
-      <a href="{% url 'core:registrar_organizacion' %}" class="btn-primary">Registrar Nueva Organización</a>
-  </div>
+    <a href="{% url 'core:registrar_organizacion' %}" class="btn-primary">Registrar Nueva Organización</a>
 
-  <table>
-      <thead>
-          <tr>
-              <th>#</th>
-              <th>Logo</th>
-              <th>Razón Social</th>
-              <th>Dirección</th>
-              <th>Rubro</th>
-              <th>Provincias</th>
-              <th>Acciones</th>
-          </tr>
-      </thead>
-      <tbody>
-          {% for organizacion in page_obj %}
-              <tr>
-                  <td data-label="#">{{ forloop.counter }}</td>
-                  <td data-label="Logo">
-                        {% if organizacion.logo %}
-                            <img src="{{ organizacion.logo.url }}" alt="Logo de {{ organizacion.razon_social }}"
-                                class="img-logo" style="max-width: 50px; height: auto;">
-                        {% else %}
-                            No disponible
-                        {% endif %}
-                  </td>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Logo</th>
+                    <th>Razón Social</th>
+                    <th>Dirección</th>
+                    <th>Rubro</th>
+                    <th>Provincias</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for organizacion in page_obj %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>
+                            {% if organizacion.logo %}
+                                <img src="{{ organizacion.logo.url }}" alt="Logo de {{ organizacion.razon_social }}" class="img-logo" style="max-width: 50px; height: auto;">
+                            {% else %}
+                                No disponible
+                            {% endif %}
+                        </td>
+                        <td>{{ organizacion.razon_social }}</td>
+                        <td>{{ organizacion.direccion }}</td>
+                        <td>{{ organizacion.rubro }}</td>
+                        <td>
+                            {% for provincia in organizacion.provincias.all %}
+                                {{ provincia.nombre }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <a href="{% url 'core:editar_organizacion' organizacion.id %}" class="edit-btn" title="Editar">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="{% url 'core:confirmar_eliminar_organizacion' organizacion.id %}" class="delete-btn" title="Eliminar">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="7">No hay organizaciones registradas.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-                  <td data-label="Razón Social">{{ organizacion.razon_social }}</td>
-                  <td data-label="Dirección">{{ organizacion.direccion }}</td>
-                  <td data-label="Rubro">{{ organizacion.rubro }}</td>
-                  <td data-label="Provincias">
-                      {% for provincia in organizacion.provincias.all %}
-                          {{ provincia.nombre }}{% if not forloop.last %}, {% endif %}
-                      {% endfor %}
-                  </td>
-                  <td data-label="Acciones">
-                      <a href="{% url 'core:editar_organizacion' organizacion.id %}" class="edit-btn">Editar</a>
-                      <a href="{% url 'core:confirmar_eliminar_organizacion' organizacion.id %}" class="delete-btn">Eliminar</a>
-                  </td>
-              </tr>
-          {% empty %}z
-              <tr>
-                  <td colspan="7" style="text-align: center;">No hay organizaciones registradas.</td>
-              </tr>
-          {% endfor %}
-      </tbody>
-  </table>
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li><a href="?page=1">Primera</a></li>
+            <li><a href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+        {% endif %}
 
-  <ul class="pagination">
-      {% if page_obj.has_previous %}
-          <li><a href="?page=1">Primera</a></li>
-          <li><a href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
-      {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <li><span class="active">{{ num }}</span></li>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <li><a href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+        {% endfor %}
 
-      {% for num in page_obj.paginator.page_range %}
-          {% if page_obj.number == num %}
-              <li><span class="active">{{ num }}</span></li>
-          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-              <li><a href="?page={{ num }}">{{ num }}</a></li>
-          {% endif %}
-      {% endfor %}
-
-      {% if page_obj.has_next %}
-          <li><a href="?page={{ page_obj.next_page_number }}">Siguiente</a></li>
-          <li><a href="?page={{ page_obj.paginator.num_pages }}">Última</a></li>
-      {% endif %}
-  </ul>
+        {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}">Siguiente</a></li>
+            <li><a href="?page={{ page_obj.paginator.num_pages }}">Última</a></li>
+        {% endif %}
+    </ul>
+</div>
 {% endblock %}

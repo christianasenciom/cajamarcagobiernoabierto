@@ -565,12 +565,13 @@ footer .footer-text:hover {
     text-align: center;
 }
 .profile-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #fff;
-}
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #315fbf;
+        margin-bottom: 15px;
+    }
 
 .h3a {
             font-size: 2rem; /* Tamaño base */
@@ -578,3 +579,12 @@ footer .footer-text:hover {
             line-height: 1.5;
             text-align: center;
     }
+
+.profile-imgbase {
+    width: 100px;
+    height:100px;
+    border-radius: 20%;
+    object-fit: cover;
+    display: block;
+    margin: 10px auto;
+}

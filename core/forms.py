@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Organizacion, Persona, Evento, Documento, Eje
+from .models import Organizacion, Persona, Evento, Documento, Eje, Profile
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -275,3 +275,14 @@ class HitoForm(forms.ModelForm):
             }),
         }
 
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['image']
+        labels = {
+            'image': 'Foto de Perfil'
+        }
+        widgets = {
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        }

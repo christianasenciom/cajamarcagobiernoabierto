@@ -4,10 +4,11 @@ from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import DetailView
 
-from .models import Eje, Compromiso, Comentario, Voto, RedSocial, Persona, Organizacion, Categoria, Documento, Evento, Hito
+from .models import Eje, Compromiso, Comentario, Voto, RedSocial, Persona, Organizacion, Categoria, Documento, Evento, \
+    Hito, Profile
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .forms import UserRegistrationForm, UserLoginForm, EventoForm
+from .forms import UserRegistrationForm, UserLoginForm, EventoForm, ProfileForm
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
 from .forms import OrganizacionForm, PersonaForm, DocumentoForm
@@ -531,3 +532,17 @@ def detalle__compromiso(request, pk):
         'compromiso': compromiso,
         'porcentaje': porcentaje
     })
+
+@login_required
+def editar_perfil(request):
+    perfil, created = Profile.objects.get_or_create(user=request.user)  # Obtener o crear perfil
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=perfil)
+        if form.is_valid():
+            form.save()
+            return redirect('core:profile')  # Redirige a la página de perfil
+    else:
+        form = ProfileForm(instance=perfil)
+
+    return render(request, 'core/editar_perfil.html', {'form': form})

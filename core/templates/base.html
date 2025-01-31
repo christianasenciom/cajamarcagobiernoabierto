@@ -83,7 +83,11 @@
                                     <strong>{{ user.first_name }} {{ user.last_name }}</strong>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
-                                    <img src="{{ user.profile_image.url|default:'/static/img/perfil.png' }}" alt="Foto de perfil" class="profile-img">
+                                    {% if user.profile.image %}
+                                        <img src="{{ user.profile.image.url }}" alt="Foto de Perfil" class="profile-imgbase">
+                                    {% else %}
+                                        <img src="{% static 'img/user.png' %}" alt="Foto de Perfil" class="profile-imgbase">
+                                    {% endif %}
                                     <li><a class="dropdown-item" href="{% url 'core:profile' %}">Perfil</a></li>
                                     <li><a class="dropdown-item" href="{% url 'core:logout' %}">Cerrar sesión</a></li>
                                 </ul>

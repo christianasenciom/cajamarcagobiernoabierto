@@ -9,47 +9,120 @@
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-        background-image: url("{% static 'img/banner.jpg' %}"); /* Ruta del banner */
+        background-image: url("{% static 'img/banner.jpg' %}");
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
         color: #333;
-
-        .h3a {
-        font-size: 2rem; /* Tamaño base */
-        color: #315fbf;
-        line-height: 1.5;
-        text-align: center;
-        }
-
     }
 
+    .profile-container {
+        max-width: 600px;
+        margin: 50px auto;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+
+    .profile-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #315fbf;
+        margin-bottom: 15px;
+    }
+
+    .profile-title {
+        font-size: 1.8rem;
+        color: #315fbf;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .profile-info p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #555;
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .btn-custom {
+        width: 48%;
+        padding: 10px;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-edit {
+        background-color: #315fbf;
+        color: white;
+        border: none;
+    }
+
+    .btn-edit:hover {
+        background-color: #254a91;
+    }
+
+    .btn-back {
+        background-color: #6c757d;
+        color: white;
+        border: none;
+    }
+
+    .btn-back:hover {
+        background-color: #545b62;
+    }
+
+    @media (max-width: 768px) {
+        .btn-container {
+            flex-direction: column;
+        }
+
+        .btn-custom {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
 </style>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-<div class="content">
-    <div class="card shadow-sm p-4">
-        <h3 class="h3a"><strong>PERFIL</strong></h3>
+<div class="profile-container">
+    <!-- Imagen de perfil del usuario -->
+    {% if user.profile.image %}
+        <img src="{{ user.profile.image.url }}" alt="Foto de Perfil" class="profile-img">
+    {% else %}
+        <img src="{% static 'img/user.png' %}" alt="Foto de Perfil" class="profile-img">
+    {% endif %}
 
-        <!-- Información del compromiso -->
-        <div class="mb-4">
-            <p><strong>Nombres:</strong>         {{ user.first_name }}</p>
-            <p><strong>Apellidos:</strong>       {{ user.last_name }}</p>
-            <p><strong>Email:</strong>           {{ user.email }}</p>
-            <p><strong>Username:</strong>        {{ user.username }}</p>
-            <p><strong>Último logeo:</strong>    {{ user.last_login }}</p>
-            <p><strong>Fecha de Unión:</strong>  {{ user.date_joined }}</p>
-            <p><strong>Activo?:</strong>         {{ user.is_active }}</p>
+    <h3 class="profile-title">PERFIL DE USUARIO</h3>
 
-        </div>
+    <div class="profile-info">
+        <p><strong>Nombres:</strong> {{ user.first_name }}</p>
+        <p><strong>Apellidos:</strong> {{ user.last_name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Último acceso:</strong> {{ user.last_login }}</p>
+        <p><strong>Fecha de Registro:</strong> {{ user.date_joined }}</p>
+        <p><strong>Estado:</strong> {% if user.is_active %}Activo{% else %}Inactivo{% endif %}</p>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="btn-container">
+        <a href="javascript:history.back()" class="btn btn-back btn-custom">Regresar</a>
+        <a href="{% url 'core:editar_perfil' %}" class="btn btn-edit btn-custom">Editar Perfil</a>
     </div>
 </div>
 
-<!-- Script para mejorar la responsividad y agregar interactividad -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    // Puedes agregar lógica adicional aquí si necesitas.
-</script>
 {% endblock %}
+
 

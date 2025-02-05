@@ -79,11 +79,11 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'gobiernoabiertodb',
-        'USER': 'gobiernoabierto',
-        'PASSWORD': '//G081rn0@81ry0//*.',
-        'HOST': '10.10.10.31',
-        'PORT': '5432',                
+        'NAME': 'cajamarcagobiernoabierto_db',
+        'USER': 'postgres',
+        'PASSWORD': 'SaDRGsR6',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

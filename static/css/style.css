@@ -149,6 +149,17 @@ h3 {
     font-size: 1.5rem;
 }
 
+.h3timeline1 {
+    font-size: 3rem;
+    color: white;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.h3timeline:hover {
+    color: white;
+    font-size: 2rem;
+}
 
 p {
     font-size: 1rem;

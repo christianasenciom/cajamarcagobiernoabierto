@@ -79,11 +79,11 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cajamarcagobiernoabierto_db',  # Cambia esto por el nombre de tu base de datos
-        'USER': 'postgres',          # Cambia esto por tu usuario de PostgreSQL
-        'PASSWORD': 'SaDRGsR6',   # Cambia esto por tu contraseña de PostgreSQL
-        'HOST': 'localhost',           # Cambia si usas otro host
-        'PORT': '5432',                # Puerto predeterminado de PostgreSQL
+        'NAME': 'gobiernoabiertodb',
+        'USER': 'gobiernoabierto',
+        'PASSWORD': '//G081rn0@81ry0//*.',
+        'HOST': '10.10.10.31',
+        'PORT': '5432',                
     }
 }
 
@@ -121,7 +121,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type

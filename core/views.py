@@ -461,10 +461,21 @@ def editar_compromiso(request, pk):
         form = CompromisoForm(request.POST, instance=compromiso)
         if form.is_valid():
             form.save()
-            return redirect('detalle_compromiso', pk=pk)
+            return redirect('core:detalle_compromiso', pk=pk)
     else:
         form = CompromisoForm(instance=compromiso)
     return render(request, 'core/editar_compromiso.html', {'form': form})
+
+def editar_hito(request, id):
+    hito = get_object_or_404(Hito, id=id)
+    if request.method == 'POST':
+        form = HitoForm(request.POST, instance=hito)
+        if form.is_valid():
+            form.save()
+            return redirect('core:hitos_lista', id=id)
+    else:
+        form = HitoForm(instance=hito)
+    return render(request, 'core/editar_hito.html', {'form': form})
 
 def eliminar_compromiso(request, pk):
     compromiso = get_object_or_404(Compromiso, pk=pk)

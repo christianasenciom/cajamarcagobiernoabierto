@@ -157,6 +157,13 @@
                 {% else %}
                         No disponible
                 {% endif %}</td>
+            <td>
+                <div class="actions">
+                   <a href="{% url 'core:editar_hito' hito.id %}" class="edit-btn" title="Editar">
+                      <i class="fa fa-pencil-alt"></i>
+                   </a>
+                </div>
+            </td>
           </tr>
         {% empty %}
           <tr>

@@ -60,6 +60,7 @@ urlpatterns = [
     path('eventos/', views.eventos_lista, name='eventos_lista'),
     path('eventos/crear/', views.crear_evento, name='crear_evento'),
     path('editar_evento/<int:id>/', views.editar_evento, name='editar_evento'),
+    path('editar_hito/<int:id>/', views.editar_hito, name='editar_hito'),
     path('calendario/', views.calendario, name='calendario'),
 
     path('introduccionpal/', views.introduccionpal, name='introduccionpal'),

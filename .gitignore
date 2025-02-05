@@ -1,9 +1,32 @@
+# Archivos de Python
 __pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+*.eggs/
 *.sqlite3
+
+# Entorno virtual
 .env
+.venv/
 venv/
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+cajamarcagobiernoabierto/settings.py
+
+# Archivos de bases de datos locales
 db.sqlite3
 *.log
+*.json
 
-*.svg binary
-*.xml text eol=lf
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de control de versiones
+*.swp
+*.swo
+*.bak
+*.orig
+*.rej
